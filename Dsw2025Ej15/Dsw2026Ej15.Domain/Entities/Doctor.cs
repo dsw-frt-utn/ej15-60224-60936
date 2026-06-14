@@ -6,4 +6,5 @@ public class Doctor : BaseEntitiy
     public string LicenceNumber { get; set; }
     public bool isActive { get; set; }
     public Speciality Speciality { get; set; }
+    public bool IsActive { get; set; }
 }
