@@ -32,19 +32,36 @@ public class DoctorsController : ControllerBase
         return Created(); //Created es 201
         
     }
-/*
+
     [HttpGet]
     public async Task<IActionResult> GetDoctors()
     {
+        var doctors = _persistence.GetDoctors();
         
+        return await Task.FromResult(Ok(doctors));
     }
+    
 
-    [HttpGet]
-    public async Task<IActionResult> GetDoctor([FromBody] Guid id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDoctor(Guid id)
     {
-        
-    }
+        var doctor = _persistence.GetDoctor(id);
+        if (doctor == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            var response = new DoctorModel.Response(
+                doctor.Name,
+                doctor.LicenceNumber,
+                doctor.Speciality.Name
+            );
+            return Ok(response);
+        }
 
+    }
+/*
     [HttpDelete]
     public async Task<IActionResult> DeleteDoctor([FromBody] Guid id)
     {
