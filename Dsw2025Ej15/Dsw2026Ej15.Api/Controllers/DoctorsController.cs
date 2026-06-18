@@ -37,7 +37,6 @@ public class DoctorsController : ControllerBase
     public async Task<IActionResult> GetDoctors()
     {
         var doctors = _persistence.GetDoctors();
-        
         return await Task.FromResult(Ok(doctors));
     }
     
@@ -61,11 +60,20 @@ public class DoctorsController : ControllerBase
         }
 
     }
-/*
-    [HttpDelete]
+
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteDoctor([FromBody] Guid id)
     {
+        var doctor = _persistence.GetDoctor(id);
+
+        if (doctor == null)
+        {
+            return await Task.FromResult(NotFound("El médico no fue encontrado o ya está inactivo"));
+        }
         
+        _persistence.DeleteDoctor(id);
+        
+        return await Task.FromResult(NoContent());
     }
- */
+ 
 }
