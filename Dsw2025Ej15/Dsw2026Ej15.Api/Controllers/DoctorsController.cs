@@ -28,9 +28,9 @@ public class DoctorsController : ControllerBase
         {
             return BadRequest("La especialidad no existe");
         }
-        _persistence.AddDoctor(new Doctor(request.Name, request.LicenceNumber, speciality,new Guid()));
-        return Created(); //Created es 201
-        
+        var doctor = new Doctor(request.Name, request.LicenceNumber, speciality,Guid.NewGuid());
+        _persistence.AddDoctor(doctor);
+        return Created();
     }
 
     [HttpGet]
