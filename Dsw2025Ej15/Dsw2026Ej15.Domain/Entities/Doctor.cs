@@ -1,10 +1,9 @@
 namespace Dsw2026Ej15.Domain.Entities;
 
-public class Doctor : BaseEntitiy
+public class Doctor(string name, string licenceNumber, Speciality speciality, Guid id) : BaseEntity(id)
 {
-    public string Name { get; set; }
-    public string LicenceNumber { get; set; }
-    public bool isActive { get; set; }
-    public Speciality Speciality { get; set; }
-    public bool IsActive { get; set; }
+    public string Name { get; init; } = name;
+    public string LicenceNumber { get; init; } = licenceNumber;
+    public Speciality Speciality { get; private set; } = speciality;
+    public bool IsActive { get; set; } = true; // cambiar ese init por private set
 }
