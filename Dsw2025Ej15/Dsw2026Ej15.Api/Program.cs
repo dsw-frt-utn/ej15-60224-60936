@@ -1,5 +1,7 @@
+using Dsw2026Ej15.Api.Middleware;
 using Dsw2026Ej15.Data.Persistence;
 using Dsw2026Ej15.Domain.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IPersistence, PersistenceInMemory>();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
