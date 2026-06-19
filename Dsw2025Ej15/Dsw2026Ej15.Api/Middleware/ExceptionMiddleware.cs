@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using Dsw2026Ej15.Domain.Entities;
 using Dsw2026Ej15.Domain.Exceptions;
 
 namespace Dsw2026Ej15.Api.Middleware;
@@ -21,7 +22,7 @@ public class ExceptionMiddleware
         }
         catch (ValidationException ex)
         {
-            await HandleExceptionAsync(context, ex, HttpStatusCode.NotFound);
+            await HandleExceptionAsync(context, ex, HttpStatusCode.BadRequest);
         }
         catch (Exception ex)
         {

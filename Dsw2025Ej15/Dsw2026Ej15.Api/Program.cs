@@ -11,13 +11,12 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IPersistence, PersistenceInMemory>();
-
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-app.UseMiddleware<ExceptionMiddleware>();
-app.MapHealthChecks("/health-check");
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -26,6 +25,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
+
 app.MapControllers();
+app.MapHealthChecks("/health-check");
+
 app.Run();
