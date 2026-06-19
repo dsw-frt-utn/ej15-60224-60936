@@ -53,7 +53,7 @@ public class DoctorsController : ControllerBase
         {
             var response = new DoctorModel.Response(
                 doctor.Name,
-                doctor.LicenceNumber,
+                doctor.LicenseNumber,
                 doctor.Speciality.Name
             );
             return Ok(response);
@@ -62,7 +62,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteDoctor([FromBody] Guid id)
+    public async Task<IActionResult> DeleteDoctor(Guid id)
     {
         var doctor = _persistence.GetDoctor(id);
 

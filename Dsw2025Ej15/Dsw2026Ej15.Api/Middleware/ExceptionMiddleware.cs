@@ -17,17 +17,14 @@ public class ExceptionMiddleware
     {
         try
         {
-            //Pasamos la petición al componente
             await _next(context);
         }
-        catch (NotFoundException ex)
+        catch (ValidationException ex)
         {
-            //Salta nuestra excepción, devolvemos NotFound 404
             await HandleExceptionAsync(context, ex, HttpStatusCode.NotFound);
         }
         catch (Exception ex)
         {
-            //Si salta cualquier otro error, devuelve 500
             await HandleExceptionAsync(context, ex, HttpStatusCode.InternalServerError);
         }
     }
@@ -36,8 +33,7 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)statusCode;
-
-        //Estructura que ve el cliente del error
+        
         var response = new
         {
             statusCode = context.Response.StatusCode,

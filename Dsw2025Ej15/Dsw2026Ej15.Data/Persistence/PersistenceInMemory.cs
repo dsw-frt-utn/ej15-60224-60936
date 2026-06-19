@@ -15,10 +15,6 @@ public class PersistenceInMemory : IPersistence
     {
         _doctors = new List<Doctor>();
         LoadSpecialities();
-        foreach (var speciality in _specialities)
-        {
-            Console.WriteLine("Especialidad: " + speciality.Name + "");
-        }
     }
 
     public void AddDoctor(Doctor doctor)
@@ -59,8 +55,6 @@ public class PersistenceInMemory : IPersistence
             _specialities = specialities != null
                 ? [.. specialities.Select(s => new Speciality(s.Name, s.Description, s.Id))]
                 : [];
-            Console.WriteLine("Cargado {0} especialidades", _specialities.Count);
-            Console.WriteLine(_specialities.First().Name);
         }
         catch(Exception ex)
         {

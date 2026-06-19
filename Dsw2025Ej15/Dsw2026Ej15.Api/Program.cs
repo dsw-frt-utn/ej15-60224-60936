@@ -12,8 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IPersistence, PersistenceInMemory>();
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
+
 app.UseMiddleware<ExceptionMiddleware>();
+app.MapHealthChecks("/health-check");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
